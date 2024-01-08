@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('labs', function (Blueprint $table) {
             $table->id();
-            $table->string('siape',7);
+            $table->string('tag');
             $table->text('description')->nullable();
             $table->timestamps();
         });
