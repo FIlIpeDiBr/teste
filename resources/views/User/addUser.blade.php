@@ -1,23 +1,28 @@
 @extends('site/template/master')
 
 @section('content')
-    <form action="{{route('user.store')}}" method="post" class="container p-4">
+    <form action="{{route('user.store')}}" method="post" autocomplete="on" class="container p-4">
         @csrf
             <div class="row justify-content-around pt-4">
                 <div class="col-6">
                     <div class="m-3 row">
                         <label for="name" class="form-label">Nome:</label>
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" id="name" autocomplete="name" class="form-control" required>
                     </div>
-                    
+
+                    <div class="m-3 row">
+                        <label for="siape" class="form-label">Siape:</label>
+                        <input type="text" name="siape" id="siape" class="form-control" required>
+                    </div>
+
                     <div class="m-3 row">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" name="email" class="form-control">
+                        <input type="email" name="email" id="email" autocomplete="email" class="form-control" required>
                     </div>
                     
                     <div class="m-3 row">
-                        <label for="" class="form-label">Senha:</label>
-                        <input type="password" name="password" class="form-control">
+                        <label for="password" class="form-label">Senha:</label>
+                        <input type="password" name="password" id="password" autocomplete="new-password" class="form-control" required>
                     </div>
                     
                     <div class="row justify-content-start">

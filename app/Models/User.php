@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -19,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'siape',
         'email',
         'password',
     ];
@@ -42,4 +44,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if(!filter_var($user->email,FILTER_VALIDATE_EMAIL)) throw new \Exception("O email é inválido");
+            
+            if(empty($user->password)) throw new \Exception("A senha é necessária");
+        });
+    }
+
+    public function timeslot() : HasMany{
+        return $this->hasMany(Timeslot::class, 'responsible', 'siape');
+    }
 }

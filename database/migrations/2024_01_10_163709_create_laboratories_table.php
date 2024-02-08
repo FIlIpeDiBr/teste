@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use PhpParser\Node\NullableType;
 
 return new class extends Migration
 {
@@ -12,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('labs', function (Blueprint $table) {
-            $table->id();
-            $table->string('tag');
+        Schema::create('laboratories', function (Blueprint $table) {
+            $table->string('id')->primary();
             $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('labs');
+        Schema::dropIfExists('laboratories');
     }
 };

@@ -13,9 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('', function () {
     return view('site/home');
 });
 
 
-Route::resource('usuarios','App\Http\Controllers\Form\UserController')->names('user')->parameters(['usuarios'=>'user']);
+Route::resource('reservas','App\Http\Controllers\AppointmentController')->names('appointment')->parameters(['reservas'=>'appointment'])
+->except('create');
+Route::get('reservas/novo/{laboratory}','App\Http\Controllers\AppointmentController@create')->name('appointment.create');
+Route::get('reservas/busca/{laboratory}/{day}','App\Http\Controllers\AppointmentController@getDay')->name('get.day');
+
+Route::resource('laboratorios','App\Http\Controllers\LaboratoryController')->names('laboratory')->parameters(['laboratorios'=>'laboratory']);
+
+Route::resource('usuarios','App\Http\Controllers\UserController')->names('user')->parameters(['usuarios'=>'user']);

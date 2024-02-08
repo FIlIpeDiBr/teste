@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('booking', function (Blueprint $table) {
+        Schema::create('days', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('responsible');
-            $table->date('start');
-            $table->date('end');
-            $table->text('ocurrences')->nullable();
+            $table->string('laboratory_id');
+            $table->date('date');
+            
             $table->timestamps();
 
-            $table->foreign('responsible')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('CASCADE');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booking');
+        Schema::dropIfExists('days');
     }
 };

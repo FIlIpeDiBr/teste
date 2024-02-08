@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Form;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -18,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('listAllUsers',[
+        
+        return view('User/listAllUsers',[
             'users'=>$users
         ]);
     }
@@ -28,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('addUser');
+        return view('User/addUser');
     }
 
     /**
@@ -38,9 +39,23 @@ class UserController extends Controller
     {
         $user = new User();
         $user->name = $request->name;
+        $user->siape = $request->siape;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+
         $user->save();
+
+        // try{
+        //     $user = User::create([
+        //         'name'=>$request->name,
+        //         'siape'=>$request->siape,
+        //         'email'=>$request->email,
+        //         'password'=>Hash::make($request->password)
+        //     ]);
+        // }
+        // catch(\Exception $exept){
+        //     return redirect()->back()->with('error',$exept->getMessage());
+        // }
 
         return redirect()->route('user.index');
     }
@@ -50,7 +65,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('listUser',[
+        return view('User/listUser',[
             'user'=>$user
         ]);
     }
@@ -60,7 +75,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('editUser',[
+        return view('User/editUser',[
             'user'=>$user
         ]);
     }

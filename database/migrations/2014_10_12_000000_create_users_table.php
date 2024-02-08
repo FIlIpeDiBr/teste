@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            //$table->string('siape',7)->unique();
+            $table->string('siape',7)->unique();            //LEMBRAR-> criar restrições para que o número de caracteres seja sempre = 7
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

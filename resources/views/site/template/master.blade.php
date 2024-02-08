@@ -32,20 +32,20 @@
             <a class="nav-link active" aria-current="page" href="/laravel/teste/public/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/laravel/teste/public/usuarios">Usuários</a>
+            <a class="nav-link" href="{{route('user.index')}}">Usuários</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Laboratórios</a>
+            <a class="nav-link" href="{{route('laboratory.index')}}">Laboratórios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Equipamentos</a>
+            <a class="nav-link" href="{{route('appointment.index')}}">Agendamentos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Calendário</a>
+            <a class="nav-link disabled" aria-disabled="true">Recursos</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
-          <button class="btn btn-primary">Login</button>
+          <h4 class="">Admin Pannel</h4>
         </form>
       </div>
     </div>
