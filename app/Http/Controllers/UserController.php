@@ -37,25 +37,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->siape = $request->siape;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        // $user = new User();
+        // $user->name = $request->name;
+        // $user->siape = $request->siape;
+        // $user->email = $request->email;
+        // $user->password = Hash::make($request->password);
 
-        $user->save();
+        // $user->save();
 
-        // try{
-        //     $user = User::create([
-        //         'name'=>$request->name,
-        //         'siape'=>$request->siape,
-        //         'email'=>$request->email,
-        //         'password'=>Hash::make($request->password)
-        //     ]);
-        // }
-        // catch(\Exception $exept){
-        //     return redirect()->back()->with('error',$exept->getMessage());
-        // }
+        $user = User::create([
+            'name'=>$request->name,
+            'siape'=>$request->siape,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password)
+        ]);
+        try{
+        }
+        catch(\Exception $exept){
+            return redirect()->back()->with('error',$exept->getMessage());
+        }
 
         return redirect()->route('user.index');
     }

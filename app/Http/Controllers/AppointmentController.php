@@ -40,7 +40,7 @@ class AppointmentController extends Controller
                 }
             }
         }
-  //      dd($timetable);
+        //dd($laboratories);
 
         return view('Appointment/listAllAppointments',[
             'timetable' => $timetable
