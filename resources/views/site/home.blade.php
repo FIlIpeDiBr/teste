@@ -1,17 +1,27 @@
 @extends('site/template/master')
 
 @section('content')
-    <div class="container-fluid p-4">
-        <div class="row justify-content-center py-4 debug2">
-            <div class="col-9 debug">
-                    <h1 class="row justify-content-center">
-                    A Dâmila é o amor da minha vida
-                    </h1>
-                <div class="row justify-content-evenly">
-                    <button class="btn btn-lg btn-success col-4">Concordo</button>
-                    <button class="btn btn-lg btn-warning col-4">Concordo</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<h1>Hoje é: {{now()->format('d-m')}}</h1>
+
+<table class="table container-fluid mx-5">
+    <tr class="row ">
+    <th scope="col" class="col-1 text-center">Domingo</th>
+    <th scope="col" class="col-1 text-center">Segunda</th>
+    <th scope="col" class="col-1 text-center">Terça</th>
+    <th scope="col" class="col-1 text-center">Quarta</th>
+    <th scope="col" class="col-1 text-center">Quinta</th>
+    <th scope="col" class="col-1 text-center">Sexta</th>
+    <th scope="col" class="col-1 text-center">Sábado</th>
+    </tr>
+    @for($line = 0; $line < 4; $line++)
+        <tr class="row">
+            @for($column = 0; $column < 7; $column++)
+            <td class="col-1">
+                <img src="img/quadrado.png" class="img-fluid rounded bg-secondary">
+                <!-- <small>{{now()->addDay(($line * 7 + $column))->format('d-m')}}</small> -->
+            </td>
+            @endfor
+        </tr>
+    @endfor
+</table>
 @endsection
