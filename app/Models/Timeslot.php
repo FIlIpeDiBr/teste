@@ -13,7 +13,8 @@ class Timeslot extends Model
     protected $fillable = [
         'day_id',
         'responsible',
-        'hour'
+        'hour',
+        'event'
     ];
 
     public function user() : BelongsTo{

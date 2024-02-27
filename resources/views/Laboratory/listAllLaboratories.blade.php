@@ -21,7 +21,7 @@
                     <td class="col-3">
                         <div>
                             <a href="{{route('laboratory.show', ['laboratory'=>$laboratory->id])}}" class="btn btn-info col">Informações</a>
-                            <a href="{{route('appointment.create', ['laboratory'=>$laboratory->id])}}" class="btn btn-success col">Reservar</a>
+                            <a href="{{route('appointment.create', ['laboratory'=>$laboratory->id, 'day'=>now()->format('Y-m-d')])}}" class="btn btn-success col">Reservar</a>
                         </div>
                         <form action="{{route('laboratory.destroy', ['laboratory'=>$laboratory->id])}}" method="post" class="">
                             @csrf

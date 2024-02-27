@@ -32,25 +32,46 @@ class AppointmentController extends Controller
         $laboratories = Laboratory::with('day.timeslot')->get();
 
         $timetable = [];
+        $num_of_days = 0;
         
         foreach ($laboratories as $laboratory) {
             foreach ($laboratory->day as $day) {
                 foreach ($day->timeslot as $timeslot) {
-                    $timetable[$laboratory->id][$day->date][$timeslot->hour] = User::where('siape',$timeslot->responsible)->get()->pluck('name')->first();
+                    $day_index = date("d/m/Y", strtotime($day->date));
+                    
+                    $timetable[$laboratory->id][$day_index][$timeslot->hour]['responsible']
+                        = User::where('siape',$timeslot->responsible)->get()->pluck('name')->first();
+                    
+                    $timetable[$laboratory->id][$day_index][$timeslot->hour]['event'] = $timeslot->event;
+
                 }
+                $num_of_days++;
             }
+            if($num_of_days > 1){
+                ksort($timetable[$laboratory->id]);
+            }
+
+            $num_of_days = 0;
         }
-        //dd($laboratories);
+        //dd($timetable);
 
         return view('Appointment/listAllAppointments',[
             'timetable' => $timetable
         ]);
     }
     
-    public function create(Laboratory $laboratory){
+    public function create(Request $request){
+        //$laboratory = Laboratory::find($laboratory_id);
+
+        $day = date('Y-m-d', strtotime(str_replace('/', '-', $request->day)));
+
+        //dd($request->laboratory, $day, $request->day, $request->checked);
+                
         return view('Appointment/addAppointment', [
-            'laboratory' => $laboratory,]
-        );
+            'laboratory' => $request->laboratory,
+            'day'=>$day,
+            'checked'=>$request->checked
+        ]);
     }
 
     public function store(Request $request){
@@ -74,7 +95,8 @@ class AppointmentController extends Controller
                     Timeslot::create([
                         'day_id'=>$day->id,
                         'responsible'=>$request->responsible,
-                        'hour'=>$time
+                        'hour'=>$time,
+                        'event'=>$request->event
                     ]);
                 }
                 catch(Exception $e){

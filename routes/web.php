@@ -13,14 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', function () {
-    return view('site/home');
-});
+Route::get('', 'App\Http\Controllers\HomeController@index');
 
 
 Route::resource('reservas','App\Http\Controllers\AppointmentController')->names('appointment')->parameters(['reservas'=>'appointment'])
-->except('create');
-Route::get('reservas/novo/{laboratory}','App\Http\Controllers\AppointmentController@create')->name('appointment.create');
+->except('show');
+//Route::get('reservas/novo/{data?}','App\Http\Controllers\AppointmentController@create')->name('appointment.create');
 Route::get('reservas/busca/{laboratory}/{day}','App\Http\Controllers\AppointmentController@getDay')->name('get.day');
 
 Route::resource('laboratorios','App\Http\Controllers\LaboratoryController')->names('laboratory')->parameters(['laboratorios'=>'laboratory']);

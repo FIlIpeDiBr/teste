@@ -1,8 +1,6 @@
 @extends('site/template/master')
 
 @section('content')
-<h1>Hoje é: {{now()->format('d-m')}}</h1>
-
 <table class="table container-fluid mx-5">
     <tr class="row ">
     <th scope="col" class="col-1 text-center">Domingo</th>
@@ -13,13 +11,22 @@
     <th scope="col" class="col-1 text-center">Sexta</th>
     <th scope="col" class="col-1 text-center">Sábado</th>
     </tr>
-    @for($line = 0; $line < 4; $line++)
+    @for($line = 0; $line < $rows; $line++)
         <tr class="row">
             @for($column = 0; $column < 7; $column++)
-            <td class="col-1">
-                <img src="img/quadrado.png" class="img-fluid rounded bg-secondary">
-                <!-- <small>{{now()->addDay(($line * 7 + $column))->format('d-m')}}</small> -->
-            </td>
+            @if($today->addDay()->format('w') == '0')
+                <td class="col-1 d-flex justify-content-center">
+                    <a class="btn disabled btn-dark" href="#">{{$today->format('y-d-m')}}</a>
+                </td>
+            @elseif($restricted_day[$index] == $today)
+                <td class="col-1 d-flex justify-content-center">
+                    <a class="btn disabled btn-dark" href="#{{$index++}}">{{$today->format('y-d-m')}}</a>
+                </td>
+            @else
+                <td class="col-1 d-flex justify-content-center">
+                    <a class="btn btn-primary" href="{{route('appointment.create',['day'=>$today->format('Y-m-d')])}}">{{$today->format('y-d-m')}}</a>
+                </td>
+            @endif
             @endfor
         </tr>
     @endfor

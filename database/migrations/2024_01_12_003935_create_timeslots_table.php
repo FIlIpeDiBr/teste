@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('day_id');
             $table->string('responsible');
             $table->integer('hour');
+            $table->string('event');
             $table->timestamps();
 
             $table->foreign('responsible')->references('siape')->on('users')->onDelete('CASCADE');
