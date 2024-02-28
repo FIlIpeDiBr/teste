@@ -10,7 +10,7 @@ class HomeController extends Controller{
 
     public function index(){
         $week_start_day = now()->subDays((now()->format('w') + 1));
-        $rows = 4;
+        $rows = 8;
         $restricted_day = RestrictedDay::whereBetween('date',[$week_start_day, now()->addDay($rows * 7)])->pluck('date');
 
         $index = 0;

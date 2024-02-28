@@ -20,7 +20,7 @@
         <span class="btn-group p-0" role="group" aria-label="Bloco de salas" name="hour_block">
             @for($time = 8; $time < 22; $time++)
                 <input type="checkbox" class="btn-check" name="{{$time}}" id="{{$time}}">
-                <label class="btn btn-outline-danger" for="{{$time}}" id="label-{{$time}}">{{$time}}</label>
+                <label class="btn btn-outline-danger border" for="{{$time}}" id="label-{{$time}}">{{$time}}</label>
             @endfor
         </span>
         <br><br>
