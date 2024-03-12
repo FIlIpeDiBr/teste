@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('restricted_days', function (Blueprint $table) {
             $table->date('date')->primary();
-            $table->text('reason');
+            $table->string('reason');
             $table->timestamps();
         });
     }

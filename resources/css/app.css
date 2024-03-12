@@ -5,9 +5,32 @@
   background-color: aqua
 }
 
+
 .tudo{
   height: 100vh;
 }
+.fundo{
+  background-color: rgb(240, 240, 240);
+}
+.cortar_texto{
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+.tabela {
+  width: 90%;
+  margin: 0 auto;
+}
+.celula_tabela{
+  height: 100px;
+  width: 14%;
+}
 .placehold{
   background-color: lightgrey;
+}
+
+
+
+.h-30{
+  height: 30%;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Site Dahora</title>
+    <title>EscaLab - Plataforma de agendamento de laboratórios do ICET</title>
 
     @vite(
     [
@@ -15,7 +15,7 @@
     ])
     
 </head>
-<body class="tudo">
+<body class="tudo fundo">
 
   <nav class="navbar navbar-expand-lg border-bottom mx-4 mb-4">
     <div class="container-fluid px-4">

@@ -1,34 +1,51 @@
 @extends('site/template/master')
 
 @section('content')
-<table class="table container-fluid mx-5">
-    <tr class="row ">
-    <th scope="col" class="col-1 text-center">Domingo</th>
-    <th scope="col" class="col-1 text-center">Segunda</th>
-    <th scope="col" class="col-1 text-center">Terça</th>
-    <th scope="col" class="col-1 text-center">Quarta</th>
-    <th scope="col" class="col-1 text-center">Quinta</th>
-    <th scope="col" class="col-1 text-center">Sexta</th>
-    <th scope="col" class="col-1 text-center">Sábado</th>
+
+<table class=" tabela text-center">
+    <tr>
+    <th scope="col" class="mx-1">Domingo</th>
+    <th scope="col" class="mx-1">Segunda</th>
+    <th scope="col" class="mx-1">Terça</th>
+    <th scope="col" class="mx-1">Quarta</th>
+    <th scope="col" class="mx-1">Quinta</th>
+    <th scope="col" class="mx-1">Sexta</th>
+    <th scope="col" class="mx-1">Sábado</th>
     </tr>
     @for($line = 0; $line < $rows; $line++)
-        <tr class="row">
+        <tr>
             @for($column = 0; $column < 7; $column++)
-            @if($today->addDay()->format('w') == '0')
-                <td class="col-1 d-flex justify-content-center">
-                    <a class="btn disabled btn-dark" href="#">{{$today->format('d/m/Y')}}</a>
-                </td>
-            @elseif($restricted_day[$index] == $today)
-                <td class="col-1 d-flex justify-content-center">
-                    <a class="btn disabled btn-dark" href="#{{$index++}}">{{$today->format('d/m/Y')}}</a>
-                </td>
+            <td class="pb-1 celula_tabela">
+                <div class="border border-black bg-white h-100">
+            @if($day_sequence->addDay()->format('w') == '0')
+                <p class="bg-secondary text-white h-30">{{$day_sequence->format('d/m/Y')}}</p>
+                <p class="cortar_texto">Fim de Semana</p>
+            @elseif($restricted_day[$index]["day"] == $day_sequence)
+                <p class="bg-secondary text-white h-30">{{$day_sequence->format('d/m/Y')}}</p>
+                <p>{{$restricted_day[$index]["reason"]}}</p>
+                <p hidden>"{{$index++}}"</p>
+            @elseif($today > $day_sequence)
+                <p class="bg-secondary h-30" id="{{$day_sequence->format('d-m-y')}}"><a class="text-decoration-none text-white" 
+                href="{{route('appointment.create',['day'=>$day_sequence->format('Y-m-d')])}}">{{$day_sequence->format('d/m/Y')}}</a></p>
             @else
-                <td class="col-1 d-flex justify-content-center">
-                    <a class="btn btn-primary" href="{{route('appointment.create',['day'=>$today->format('Y-m-d')])}}">{{$today->format('d/m/Y')}}</a>
-                </td>
+                <p class="bg-success h-30" id="{{$day_sequence->format('d-m-y')}}"><a class="text-decoration-none text-white" 
+                href="{{route('appointment.create',['day'=>$day_sequence->format('Y-m-d')])}}">{{$day_sequence->format('d/m/Y')}}</a></p>
             @endif
+                </div>
+            </td>
             @endfor
         </tr>
     @endfor
 </table>
 @endsection
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+$(document).ready(function () {
+    $("#{{now()->format('d-m-y')}}").removeClass('bg-success');
+    $("#{{now()->format('d-m-y')}}").addClass('bg-primary');
+});
+</script>

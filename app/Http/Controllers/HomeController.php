@@ -9,24 +9,26 @@ use Illuminate\Http\Request;
 class HomeController extends Controller{
 
     public function index(){
-        $week_start_day = now()->subDays((now()->format('w') + 1));
+        $week_start_day = now()->subDays((now()->format('w') + 8));
         $rows = 8;
-        $restricted_day = RestrictedDay::whereBetween('date',[$week_start_day, now()->addDay($rows * 7)])->pluck('date');
+        $restricted_day = RestrictedDay::whereBetween('date',[$week_start_day, now()->addDay($rows * 7)])->pluck('reason','date');
 
         $index = 0;
-        while(!empty($restricted_day[$index])){
-            $restricted_day[$index] = $restricted_day[$index].$week_start_day->format(' H:i:s');
+        foreach($restricted_day as $day=>$reason){
+            $restriction[$index]["day"] = $day.$week_start_day->format(' H:i:s');
+            if(strlen($reason) > 22)    $reason = substr($reason,0,20)."...";
+            $restriction[$index]["reason"] = $reason;
+            //$restricted_day[$restriction] = $restricted_day[$index].$week_start_day->format(' H:i:s');
             $index++;
         }
-        $restricted_day[$index] = null;
-
-
-        //dd($restricted_day);
+        $restriction[$index]["day"] = null;
+        //dd($restriction, $week_start_day);
 
         return view('site/home', [
-            'today'=> $week_start_day,
+            'today'=> now(),
+            'day_sequence'=> $week_start_day,
             'rows'=> $rows,
-            'restricted_day'=>$restricted_day,
+            'restricted_day'=>$restriction,
             'index'=> 0
         ]);
     }

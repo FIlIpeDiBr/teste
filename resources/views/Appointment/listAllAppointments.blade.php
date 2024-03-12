@@ -11,13 +11,18 @@
             <span class="btn-group d-flex flex-wrap pb-3" role="group" aria-label="Bloco de salas" name="hour_block">
                 @for($hour=8; $hour<=21; $hour++)
                     @if(isset($day[$hour]))
-                        <label class="btn btn-outline-dark py-0">
-                            {{$hour}}h<br>
+                    <span class="rounded border border-black bg-secondary text-center px-2 py-0">
+                        <label class="text-white">{{$hour}}h</label><br>
+                        <label>
                             {{$day[$hour]['responsible']}}<br>
                             {{$day[$hour]['event']}}
                         </label>
+                    </span>
                     @else
-                        <a class="btn border-dark btn-primary" href="{{route('appointment.create',['laboratory'=>$laboratory_key,'day'=>$day_key, 'checked'=>$hour])}}">{{$hour}}h</a>
+                        <span>
+                            <a class="btn border-dark btn-primary" href="{{route('appointment.create',['laboratory'=>$laboratory_key,'day'=>$day_key, 'checked'=>$hour])}}">
+                                {{$hour}}h <br> <span class="text-black">Disponível</span> </a>
+                        </span>
                     @endif
                 @endfor
             </span>

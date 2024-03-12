@@ -38,47 +38,46 @@
 
 
 <script>
-    $(document).ready(function () {
+$(document).ready(function () {
+    $('#day').change(function () {
+        var url = "{{route('get.day', [':laboratory',':day'])}}";
+        url = url.replace(':laboratory', $('#laboratory').val()).replace(':day', $(this).val());    console.log(url);
         
-        $('#day').change(function () {
-            var url = "{{route('get.day', [':laboratory',':day'])}}";
-            url = url.replace(':laboratory', $('#laboratory').val()).replace(':day', $(this).val());    console.log(url);
-            
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function (response) {          console.log(response.timeslot);
-                    var hour, label;
-                    for(hour=8; hour<=21; hour++){
-                        label = '#label-'+hour;
-                        
-                        $(label).removeClass("btn-outline-danger");
-                        $(label).addClass("btn-primary");
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (response) {          console.log(response.timeslot);
+                var hour, label;
+                for(hour=8; hour<=21; hour++){
+                    label = '#label-'+hour;
+                    
+                    $(label).removeClass("btn-outline-danger");
+                    $(label).addClass("btn-primary");
 
-                        $('#'+hour).prop('disabled',false);
-                    }
-                    if(response.timeslot == null)   return;
-                    for(hour=0; hour < response.timeslot.length; hour++){
-                        
-                        label = '#label-'+response.timeslot[hour];
-
-                        $(label).removeClass("btn-primary");
-                        $(label).addClass("btn-outline-danger");
-
-                        $('#'+response.timeslot[hour]).prop('disabled',true);
-                        $('#'+response.timeslot[hour]).prop('checked',false);
-                    }
-                },
-                error: function (error) {
-                    console.error("error");
+                    $('#'+hour).prop('disabled',false);
                 }
-            });
+                if(response.timeslot == null)   return;
+                for(hour=0; hour < response.timeslot.length; hour++){
+                    
+                    label = '#label-'+response.timeslot[hour];
+
+                    $(label).removeClass("btn-primary");
+                    $(label).addClass("btn-outline-danger");
+
+                    $('#'+response.timeslot[hour]).prop('disabled',true);
+                    $('#'+response.timeslot[hour]).prop('checked',false);
+                }
+            },
+            error: function (error) {
+                console.error("error");
+            }
         });
-        $('#laboratory').change(function() {
-            $('#day').trigger('change');
-        });
-        
-        $('#day').trigger('change');
-        $('#{{$checked}}').prop('checked', true);
     });
+    $('#laboratory').change(function() {
+        $('#day').trigger('change');
+    });
+    
+    $('#day').trigger('change');
+    $('#{{$checked}}').prop('checked', true);
+});
 </script>
