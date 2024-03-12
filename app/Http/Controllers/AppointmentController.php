@@ -14,20 +14,6 @@ use PhpParser\Node\Expr\New_;
 class AppointmentController extends Controller
 {
     public function index(){
-        // $laboratories = Laboratory::all();
-
-        // //$teste[lab][day][time]
-        // foreach($laboratories as $laboratory){
-        //     $days = Day::where('laboratory_id',$laboratory->id)->get();
-        
-        //     foreach($days as $day){
-        //         $timeslots = Timeslot::where('day_id', $day->id)->get();
-        
-        //         foreach($timeslots as $timeslot){
-        //             $vet[$laboratory->id][$day->date][$timeslot->hour] = $timeslot->responsible;
-        //         }
-        //     }
-        // }
 
         $laboratories = Laboratory::with('day.timeslot')->get();
 
