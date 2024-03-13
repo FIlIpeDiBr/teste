@@ -17,20 +17,19 @@
             @for($column = 0; $column < 7; $column++)
             <td class="pb-1 celula_tabela">
                 <div class="border border-black bg-white h-100">
-            @if($day_sequence->addDay()->format('w') == '0')
-                <p class="bg-secondary text-white h-30">{{$day_sequence->format('d/m/Y')}}</p>
-                <p class="cortar_texto">Fim de Semana</p>
-            @elseif($restricted_day[$index]["day"] == $day_sequence)
-                <p class="bg-secondary text-white h-30">{{$day_sequence->format('d/m/Y')}}</p>
-                <p>{{$restricted_day[$index]["reason"]}}</p>
-                <p hidden>"{{$index++}}"</p>
-            @elseif($today > $day_sequence)
-                <p class="bg-secondary h-30" id="{{$day_sequence->format('d-m-y')}}"><a class="text-decoration-none text-white" 
-                href="{{route('appointment.create',['day'=>$day_sequence->format('Y-m-d')])}}">{{$day_sequence->format('d/m/Y')}}</a></p>
-            @else
-                <p class="bg-success h-30" id="{{$day_sequence->format('d-m-y')}}"><a class="text-decoration-none text-white" 
-                href="{{route('appointment.create',['day'=>$day_sequence->format('Y-m-d')])}}">{{$day_sequence->format('d/m/Y')}}</a></p>
-            @endif
+                @if($day_sequence->addDay()->format('w') == '0')
+                    <p class="bg-secondary h-30">{{$day_sequence->format('d/m/Y')}}</p>
+                    <p class="cortar_texto">Domingo</p>
+                @elseif($restricted_day[$index]["day"] == $day_sequence)
+                    <p class="bg-secondary h-30">{{$day_sequence->format('d/m/Y')}}</p>
+                    <p>{{$restricted_day[$index]["reason"]}}</p>
+                    <p hidden>"{{$index++}}"</p>
+                @elseif($today > $day_sequence->format('Y-m-d'))
+                    <p class="bg-secondary h-30" id="{{$day_sequence->format('d-m-y')}}">{{$day_sequence->format('d/m/Y')}}</p>
+                @else
+                    <p class="bg-success h-30" id="{{$day_sequence->format('d-m-y')}}"><a class="text-decoration-none text-white" 
+                    href="{{route('appointment.create',['day'=>$day_sequence->format('Y-m-d')])}}">{{$day_sequence->format('d/m/Y')}}</a></p>
+                @endif
                 </div>
             </td>
             @endfor

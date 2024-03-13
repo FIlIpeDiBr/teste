@@ -18,14 +18,12 @@ class HomeController extends Controller{
             $restriction[$index]["day"] = $day.$week_start_day->format(' H:i:s');
             if(strlen($reason) > 22)    $reason = substr($reason,0,20)."...";
             $restriction[$index]["reason"] = $reason;
-            //$restricted_day[$restriction] = $restricted_day[$index].$week_start_day->format(' H:i:s');
             $index++;
         }
         $restriction[$index]["day"] = null;
-        //dd($restriction, $week_start_day);
 
         return view('site/home', [
-            'today'=> now(),
+            'today'=> now()->format('Y-m-d'),
             'day_sequence'=> $week_start_day,
             'rows'=> $rows,
             'restricted_day'=>$restriction,

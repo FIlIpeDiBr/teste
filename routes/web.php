@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', 'App\Http\Controllers\HomeController@index');
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 
 
 Route::resource('reservas','App\Http\Controllers\AppointmentController')->names('appointment')->parameters(['reservas'=>'appointment'])
