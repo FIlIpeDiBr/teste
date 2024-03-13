@@ -7,16 +7,17 @@
 
     @vite(
     [
-      'node_modules/jquery/dist/jquery.js',
-      'node_modules/bootstrap/dist/js/bootstrap.js',
+      'node_modules/jquery/dist/jquery.js?commonjs-entry',
       'node_modules/bootstrap/dist/css/bootstrap.css',
-      'resources/js/app.js',
-      'resources/css/app.css'
+      'node_modules/bootstrap/dist/js/bootstrap.bundle.js?commonjs-entry',
+      'resources/css/app.css',
+      'resources/js/app.js'
     ])
     
 </head>
-<body class="tudo">
 
+
+<body class="tudo">
   <nav class="navbar navbar-expand-lg border-bottom mx-4 mb-4">
     <div class="container-fluid px-4">
       <a class="mx-2" href="{{route('home')}}">

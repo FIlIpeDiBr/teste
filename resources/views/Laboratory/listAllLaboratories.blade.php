@@ -7,18 +7,14 @@
             <thead class="table-dark">
                 <th>Tag</th>
                 <th>Descrição</th>
-                <th>Horários</th>
                 <th>Ações</th>
             </thead>
             <tbody class="table-group-divider">
             @foreach($laboratories as $laboratory)
                 <tr>
-                    <td class="col-1">{{$laboratory->id}}</td>
-                    <td class="col-3">{{$laboratory->description}}</td>
-                    <td class="col-4">
-                        
-                    </td>
-                    <td class="col-3">
+                    <td class="col-2">{{$laboratory->id}}</td>
+                    <td class="col-6">{{$laboratory->description}}</td>
+                    <td class="col-5">
                         <div>
                             <a href="{{route('laboratory.show', ['laboratory'=>$laboratory->id])}}" class="btn btn-info col">Informações</a>
                             <a href="{{route('appointment.create', ['laboratory'=>$laboratory->id, 'day'=>now()->format('Y-m-d')])}}" class="btn btn-success col">Reservar</a>
