@@ -1,0 +1,36 @@
+{
+  "__commonjsHelpers-28e086c5.js": {
+    "file": "assets/_commonjsHelpers-28e086c5.js"
+  },
+  "node_modules/bootstrap/dist/css/bootstrap.css": {
+    "file": "assets/bootstrap-5ffef9fa.css",
+    "isEntry": true,
+    "src": "node_modules/bootstrap/dist/css/bootstrap.css"
+  },
+  "node_modules/bootstrap/dist/js/bootstrap.bundle.js?commonjs-entry": {
+    "file": "assets/bootstrap.bundle-9d83b40d.js",
+    "imports": [
+      "__commonjsHelpers-28e086c5.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/bootstrap/dist/js/bootstrap.bundle.js?commonjs-entry"
+  },
+  "node_modules/jquery/dist/jquery.js?commonjs-entry": {
+    "file": "assets/jquery-5a489186.js",
+    "imports": [
+      "__commonjsHelpers-28e086c5.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/jquery/dist/jquery.js?commonjs-entry"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-7dd4e498.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-ddee773b.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}

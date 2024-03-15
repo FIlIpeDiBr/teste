@@ -17,7 +17,7 @@ class LaboratoryController extends Controller
     {
         $laboratories = Laboratory::all();
 
-        return view('laboratory/listAllLaboratories', ['laboratories'=>$laboratories]);
+        return view('Laboratory/listAllLaboratories', ['laboratories'=>$laboratories]);
     }
 
     /**
@@ -25,7 +25,7 @@ class LaboratoryController extends Controller
      */
     public function create()
     {
-        return view('laboratory/addLaboratory');
+        return view('Laboratory/addLaboratory');
     }
 
     /**
@@ -47,7 +47,7 @@ class LaboratoryController extends Controller
      */
     public function show(Laboratory $laboratory)
     {
-        return view('laboratory/listLaboratory',[
+        return view('Laboratory/listLaboratory',[
             'laboratory' => $laboratory
         ]);
     }
@@ -57,7 +57,7 @@ class LaboratoryController extends Controller
      */
     public function edit(Laboratory $laboratory)
     {
-        return view('laboratory/editLaboratory',[
+        return view('Laboratory/editLaboratory',[
             'laboratory' => $laboratory
         ]);
     }
