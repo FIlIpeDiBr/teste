@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('User/addUser');
+        return view('User/addUser', ['error'=>'0']);
     }
 
     /**
@@ -45,19 +45,26 @@ class UserController extends Controller
 
         // $user->save();
 
-        $user = User::create([
-            'name'=>$request->name,
-            'siape'=>$request->siape,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password)
+        $request->validate([
+            'name'=>'required|string',
+            'siape'=>'required|string|unique:users|max:7|min:7',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|string|min:4'
         ]);
+
         try{
+            $user = User::create([
+                'name'=>$request->name,
+                'siape'=>$request->siape,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password)
+            ]);
         }
         catch(\Exception $exept){
-            return redirect()->back()->with('error',$exept->getMessage());
+            return redirect()->back()->withErrors([$exept->getMessage()]);
         }
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index', ['error'=>'nem deu erro']);
     }
 
     /**

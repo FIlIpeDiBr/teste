@@ -14,8 +14,11 @@ use PhpParser\Node\Expr\New_;
 class AppointmentController extends Controller
 {
     public function index(){
-
-        $laboratories = Laboratory::with('day.timeslot')->get();
+        
+        $laboratories = Laboratory::with(['day' => function ($query) {
+            $query->whereDate('date', '>=', now());
+        }, 'day.timeslot'])->get();
+        
 
         $timetable = [];
         $num_of_days = 0;
@@ -90,7 +93,7 @@ class AppointmentController extends Controller
                 }
             }
         }
-        return redirect()->route("laboratory.index");
+        return redirect()->route("appointment.index");
     }
 
     public function getDay(Request $request){

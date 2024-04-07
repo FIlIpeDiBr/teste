@@ -33,6 +33,10 @@ class LaboratoryController extends Controller
      */
     public function store(Request $request)
     {
+        try{
+
+        }
+        catch(\Exception $exept){}
         $laboratory = new Laboratory();
         $laboratory->id = $request->room.$request->block;
         $laboratory->description = $request->description;

@@ -7,17 +7,17 @@
                 <div class="col-6">
                     <div class="m-3 row">
                         <label for="name" class="form-label">Nome:</label>
-                        <input type="text" name="name" id="name" autocomplete="name" class="form-control" required>
+                        <input type="text" name="name" id="name" autocomplete="name" class="form-control" value="{{old('name')}}" required>
                     </div>
 
                     <div class="m-3 row">
                         <label for="siape" class="form-label">Siape:</label>
-                        <input type="text" name="siape" id="siape" class="form-control" required>
+                        <input type="text" name="siape" id="siape" class="form-control" value="{{old('siape')}}" required>
                     </div>
 
                     <div class="m-3 row">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" name="email" id="email" autocomplete="email" class="form-control" required>
+                        <input type="email" name="email" id="email" autocomplete="email" class="form-control" value="{{old('email')}}" required>
                     </div>
                     
                     <div class="m-3 row">
@@ -36,6 +36,9 @@
                         <figcaption class="figure-caption">Inserir imagem</figcaption>
                     </figure>
                 </div>
+                @if($errors->any())
+                    <script>alert('{{$errors->first()}}')</script>
+                @endif
             </div>
         </div>
     </form>

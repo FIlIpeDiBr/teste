@@ -21,7 +21,7 @@
                     @else
                         <span>
                             <a class="btn border-dark btn-primary" href="{{route('appointment.create',['laboratory'=>$laboratory_key,'day'=>$day_key, 'checked'=>$hour])}}">
-                                {{$hour}}h <br> <span class="text-black">Disponível</span> </a>
+                                {{$hour}}h <br> <span class="text-black">Disponível <br>‎</span></a>
                         </span>
                     @endif
                 @endfor
