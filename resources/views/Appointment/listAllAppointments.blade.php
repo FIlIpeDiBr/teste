@@ -7,7 +7,7 @@
         <a class="h4" href="{{route('appointment.create',['laboratory'=>$laboratory_key, 'day'=>now()->format('Y-m-d')])}}">Lab {{$laboratory_key}}</a>
         <div class="row rounded px-1 py-1 mt-3">
             @foreach($laboratory as $day_key=>$day)
-            <a class="h5" href="{{route('appointment.create',['laboratory'=>$laboratory_key,'day'=>$day_key])}}">{{$day_key}}:</a>
+            <a class="h5" href="{{route('appointment.create',['laboratory'=>$laboratory_key,'day'=>$day_key])}}">{{$day["week_day"].": ".$day_key}}</a>
             <span class="btn-group d-flex flex-wrap pb-3" role="group" aria-label="Bloco de salas" name="hour_block">
                 @for($hour=8; $hour<=21; $hour++)
                     @if(isset($day[$hour]))

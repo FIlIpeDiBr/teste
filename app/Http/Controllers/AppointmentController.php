@@ -7,8 +7,11 @@ use App\Models\Day;
 use App\Models\Laboratory;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use DateTime;
 use Exception;
+use Hamcrest\Type\IsString;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\String_;
 use PhpParser\Node\Expr\New_;
 
 class AppointmentController extends Controller
@@ -28,12 +31,14 @@ class AppointmentController extends Controller
                 foreach ($day->timeslot as $timeslot) {
                     $day_index = date("d/m/Y", strtotime($day->date));
                     
+                    $timetable[$laboratory->id][$day_index][$timeslot->hour]['event'] = $timeslot->event;
                     $timetable[$laboratory->id][$day_index][$timeslot->hour]['responsible']
                         = User::where('siape',$timeslot->responsible)->get()->pluck('name')->first();
                     
-                    $timetable[$laboratory->id][$day_index][$timeslot->hour]['event'] = $timeslot->event;
 
                 }
+                $timetable[$laboratory->id][$day_index]['week_day'] = $this->weekToName($day->date);
+
                 $num_of_days++;
             }
             if($num_of_days > 1){
@@ -103,5 +108,29 @@ class AppointmentController extends Controller
         else                $timeslots = null;
 
         return response()->json(['timeslot'=>$timeslots]);
+    }
+
+    public function weekToName(string $date):string{
+        $week_day = new DateTime($date);
+        $week_day = $week_day->format('w');
+                
+        if($week_day == 1){
+            return "Segunda-Feira";
+        }
+        else if($week_day == 2){
+            return "Terça-Feira";
+        }
+        else if($week_day == 3){
+            return "Quarta-Feira";
+        }
+        else if($week_day == 4){
+            return "Quinta-Feira";
+        }
+        else if($week_day == 5){
+            return "Sexta-Feira";
+        }
+        else if($week_day == 6){
+            return "Sábado";
+        }
     }
 }

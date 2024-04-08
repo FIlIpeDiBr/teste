@@ -27,8 +27,9 @@
                 @elseif($today > $day_sequence->format('Y-m-d'))
                     <p class="bg-secondary h-30" id="{{$day_sequence->format('d-m-y')}}">{{$day_sequence->format('d/m/Y')}}</p>
                 @else
-                    <p class="bg-success h-30" id="{{$day_sequence->format('d-m-y')}}"><a class="text-decoration-none text-white" 
+                    <p class="bg-success h-30" id="{{$day_sequence->format('d-m-y')}}"><a class="text-decoration-none text-white pb-0" 
                     href="{{route('appointment.create',['day'=>$day_sequence->format('Y-m-d')])}}">{{$day_sequence->format('d/m/Y')}}</a></p>
+                    <a href="{{route('appointment.create',['day'=>$day_sequence->format('Y-m-d')])}}" class="pb-2 px-5 btn btn-outline-success text-black">Disponível</a>
                 @endif
                 </div>
             </td>
