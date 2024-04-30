@@ -58,4 +58,8 @@ class User extends Authenticatable
     public function timeslot() : HasMany{
         return $this->hasMany(Timeslot::class, 'responsible', 'siape');
     }
+
+    public function getAuthIdentifierName(){
+        return 'siape';
+    }
 }

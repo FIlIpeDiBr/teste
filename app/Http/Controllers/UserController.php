@@ -17,6 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('');
         $users = User::all();
         
         return view('User/listAllUsers',[

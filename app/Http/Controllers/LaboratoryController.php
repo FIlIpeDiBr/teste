@@ -6,7 +6,10 @@ use App\Models\Laboratory;
 use App\Http\Controllers\Controller;
 use App\Models\Timeslot;
 use App\Models\Day;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LaboratoryController extends Controller
 {
@@ -15,6 +18,8 @@ class LaboratoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Laboratory::class);
+
         $laboratories = Laboratory::all();
 
         return view('Laboratory/listAllLaboratories', ['laboratories'=>$laboratories]);
@@ -25,6 +30,7 @@ class LaboratoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Laboratory::class);
         return view('Laboratory/addLaboratory');
     }
 
@@ -51,6 +57,8 @@ class LaboratoryController extends Controller
      */
     public function show(Laboratory $laboratory)
     {
+        $this->authorize('viewOne', Laboratory::class);
+
         return view('Laboratory/listLaboratory',[
             'laboratory' => $laboratory
         ]);
@@ -61,6 +69,8 @@ class LaboratoryController extends Controller
      */
     public function edit(Laboratory $laboratory)
     {
+        $this->authorize('update', Laboratory::class);
+
         return view('Laboratory/editLaboratory',[
             'laboratory' => $laboratory
         ]);
@@ -84,6 +94,8 @@ class LaboratoryController extends Controller
      */
     public function destroy(Laboratory $laboratory)
     {
+        $this->authorize('delete', Laboratory::class);
+
         $laboratory->delete();
 
         return redirect()->route('laboratory.index');
