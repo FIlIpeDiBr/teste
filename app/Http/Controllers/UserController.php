@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->authorize('');
+        //$this->authorize('');
         $users = User::all();
         
         return view('User/listAllUsers',[
@@ -71,8 +71,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
+        //dd($request->user);
+        $this->authorize('viewOne', [User::class, $request->user->siape]);
+
         return view('User/listUser',[
             'user'=>$user
         ]);
@@ -81,8 +84,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user, Request $request)
     {
+        $this->authorize('update', [User::class, $request->user->siape]);
+
         return view('User/editUser',[
             'user'=>$user
         ]);

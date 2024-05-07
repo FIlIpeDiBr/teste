@@ -1,6 +1,7 @@
 @extends('site/template/master')
 
 @section('content')
+    @if(Gate::allows('isAdmin'))
     <form action="{{route('appointment.store')}}" method="POST" class="container">
         @csrf
 
@@ -31,6 +32,38 @@
 
         <button type="submit">Reservar</button>
     </form>
+    @elseif(Auth::check())
+    <form action="{{route('appointment.store')}}" method="POST" class="container">
+        @csrf
+
+        <label for="laboratory">Laboratório:</label>   <br>
+        <input type="text" id="laboratory"name="laboratory" value="{{$laboratory}}" required>
+        <br><br>
+
+        <label for="responsible">Responsável:</label>   <br>
+        <input type="text" id="responsible" name="responsible" value="{{auth()->user()->siape}}" readonly>
+        <br><br>
+
+        <label for="day">Dia:</label>      <br>
+        <input type="date" id="day" name="day" value="{{$day}}" required>
+        <br><br>
+
+        <label>Hora:</label>     <br>
+        <span class="btn-group p-0" role="group" aria-label="Bloco de salas" name="hour_block">
+            @for($time = 8; $time < 22; $time++)
+                <input type="checkbox" class="btn-check" name="{{$time}}" id="{{$time}}">
+                <label class="btn btn-outline-danger border" for="{{$time}}" id="label-{{$time}}">{{$time}}</label>
+            @endfor
+        </span>
+        <br><br>
+
+        <label for="event">Evento:</label>   <br>
+        <input type="text" id="event" name="event" placeholder="Evento" required>
+        <br><br>
+
+        <button type="submit">Reservar</button>
+    </form>
+    @endif
 @endsection
 
 

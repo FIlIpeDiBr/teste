@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Laboratory;
+use App\Models\User;
 use App\Policies\LaboratoryPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         //Gate::policy(Laboratory::class, LaboratoryPolicy::class);
         //Gate::define('viewg',[LaboratoryPolicy::class, 'view']);
 
-        Gate::define('isAdmin', function ($user) {
+        Gate::define('isAdmin', function (User $user) {
             return $user->role === 'admin';
         });
     }
